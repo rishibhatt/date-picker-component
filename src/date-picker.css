@@ -1,0 +1,60 @@
+.date-range-picker {
+  font-family: Arial, sans-serif;
+  max-width: 400px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.header select {
+  padding: 4px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+.day,
+.empty-slot {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.day:hover {
+  background: #e6e6e6;
+}
+.day.in-range {
+  background: #d3e4f7;
+}
+.day.start-date {
+  background: #4caf50;
+  color: white;
+}
+.day.end-date {
+  background: #f44336;
+  color: white;
+}
+.day.weekend {
+  color: #aaa;
+  cursor: not-allowed;
+}
+.day-header {
+  font-weight: bold;
+  text-align: center;
+}
+.empty-slot {
+  background: transparent;
+  border: none;
+}
