@@ -17,9 +17,7 @@ function DateRangePicker({ onRangeChange, predefinedRanges }: DateRangePickerPro
 
     const generateDays = () => {
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-        console.log(firstDayOfMonth, "===firstDayOfMonth");
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        console.log(daysInMonth, "===daysInMonth");
         const dates = [];
         for (let i = 0; i < firstDayOfMonth; i++) {
             dates.push(null);
@@ -89,15 +87,32 @@ function DateRangePicker({ onRangeChange, predefinedRanges }: DateRangePickerPro
     };
 
     const handlePredefinedRangeClick = (range: [Date, Date]) => {
+        const today = new Date();
         setStartDate(range[0]);
         setEndDate(range[1]);
         setSelecting(true);
-
+        setCurrentMonth(today.getMonth());
+        setCurrentYear(today.getFullYear());
         const weekends = calculateWeekendDates(range[0], range[1]);
         setWeekendDates(weekends);
         if (onRangeChange) {
             onRangeChange(range, weekends);
         }
+    };
+    const refreshChange = () => {
+        const today = new Date();
+        setStartDate(null);
+        setEndDate(null);
+        setCurrentMonth(today.getMonth());
+        setCurrentYear(today.getFullYear());
+    }
+    const handleTodayClick = () => {
+        const today = new Date();
+        setStartDate(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+        setEndDate(null);
+        setCurrentMonth(today.getMonth());
+        setCurrentYear(today.getFullYear());
+        setSelecting(true);
     };
 
     useEffect(() => {
@@ -139,12 +154,15 @@ function DateRangePicker({ onRangeChange, predefinedRanges }: DateRangePickerPro
                 )}
             </div>
             {predefinedRanges && (
+
                 <div className="predefined-ranges">
+                    <button onClick={handleTodayClick}>Today</button>
                     {predefinedRanges.map((range) => (
                         <button key={range.label} onClick={() => handlePredefinedRangeClick(range.range)}>
                             {range.label}
                         </button>
                     ))}
+                    <button onClick={refreshChange}>Refresh</button>
                 </div>
             )}
             <div className="selected-range">

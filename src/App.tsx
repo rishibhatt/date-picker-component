@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <h1>SupplyHouse-DatePicker</h1>
+      <h1>Date Picker Component</h1>
       <DateRangePicker predefinedRanges={predefinedRanges} />
     </>
   );
